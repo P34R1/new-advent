@@ -49,7 +49,7 @@ edition = "2021"
 
 pub fn main_rs_content(chosen_day: u32) -> String {
     format!(
-        r#"const INPUT: &str = include_str!("./input.txt");
+        r#"const INPUT: &str = include_str!("../input.txt");
 
 fn main() {{
     let answer_1 = day_{chosen_day:02}::part_1(INPUT);
