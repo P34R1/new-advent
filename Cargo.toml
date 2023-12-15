@@ -6,24 +6,18 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 # Dependencies are all optimized
-[dependencies.chrono]
-version = "0.4.31"
-default-features = false
-
-[dependencies.inquire]
-version = "0.6.2"
-default-features = false
-features = ["date", "crossterm"]
-
-[dependencies.reqwest]
-version = "0.11.22"
-default-features = false
-features = ["cookies", "blocking", "default-tls"]
+[dependencies]
+chrono = { version = "0.4.31", default-features = false }
+inquire = { version = "0.6.2", default-features = false, features = [
+    "date",
+    "crossterm",
+] }
+ureq = { version = "2.9.1", default-features = false, features = ["tls"] }
 
 [profile.release]
 strip = true # Automatically strip symbols from the binary
 
-opt-level = 3 # Optimize for size/speed
+opt-level = "z" # Optimize for size/speed
 
 #    0: no optimizations
 #    1: basic optimizations

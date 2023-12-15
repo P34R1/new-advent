@@ -1,5 +1,3 @@
-use reqwest::{blocking::Client, header::COOKIE};
-
 pub const LIB_RS_CONTENT: &[u8] = r#"use std::io::{Error, ErrorKind};
 
 pub fn part_1(input: &str) -> Result<usize, Error> {
@@ -14,23 +12,13 @@ pub fn part_2(input: &str) -> Result<usize, Error> {
 
 const SESSION_COOKIE_HEADER: &str = include_str!("../../.session.cookie");
 
-pub fn input_txt_content(chosen_year: &str, chosen_day: &str) -> Result<String, reqwest::Error> {
+pub fn input_txt_content(chosen_year: &str, chosen_day: &str) -> Result<String, std::io::Error> {
     let url = format!("https://adventofcode.com/{chosen_year}/day/{chosen_day}/input");
 
-    // Build the request
-    let response = Client::new()
-        .get(url)
-        // Add the cookie
-        .header(COOKIE, SESSION_COOKIE_HEADER)
-        .send()?; // Send the request
-
-    // Check if the request was successful
-    if !response.status().is_success() {
-        panic!("Request failed with status: {}", response.status());
+    match ureq::get(&url).set("Cookie", SESSION_COOKIE_HEADER).call() {
+        Ok(res) => res.into_string(),
+        Err(err) => panic!("Request failed:\n{:?}", err),
     }
-
-    // Process the response
-    response.text()
 }
 
 pub fn cargo_toml_content(chosen_day: u32) -> String {
