@@ -4,8 +4,7 @@ This is a basic project that will automatically scaffold a rust advent of code p
 
 ## Usage
 
-- Fill in .session.cookie.example
-    - Should look like session=546eg45g
+- Fill in .session.cookie (REMOVE THE BRACKETS)
 - Get your session cookie by
     - going to <https://adventofcode.com/>
     - open developer tools (CTRL+SHIFT+I)
