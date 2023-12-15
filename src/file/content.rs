@@ -49,11 +49,11 @@ edition = "2021"
 
 pub fn main_rs_content(chosen_day: u32) -> String {
     format!(
-        r#"fn main() {{
-    let input = std::fs::read_to_string("./input.txt").expect("couldn't read ./input.txt");
+        r#"const INPUT: &str = include_str!("./input.txt");
 
-    let answer_1 = day_{chosen_day:02}::part_1(&input);
-    let answer_2 = day_{chosen_day:02}::part_2(&input);
+fn main() {{
+    let answer_1 = day_{chosen_day:02}::part_1(INPUT);
+    let answer_2 = day_{chosen_day:02}::part_2(INPUT);
 
     match answer_1 {{
         Ok(answer) => println!("1: {{}}", answer),
