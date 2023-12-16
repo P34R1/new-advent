@@ -12,12 +12,21 @@ pub fn part_2(input: &str) -> Result<usize, Error> {
 
 const SESSION_COOKIE_HEADER: &str = include_str!("../../.session.cookie");
 
-pub fn input_txt_content(chosen_year: &str, chosen_day: &str) -> Result<String, std::io::Error> {
+pub fn input_txt_content(chosen_year: &str, chosen_day: &str) -> String {
     let url = format!("https://adventofcode.com/{chosen_year}/day/{chosen_day}/input");
 
     match ureq::get(&url).set("Cookie", SESSION_COOKIE_HEADER).call() {
-        Ok(res) => res.into_string(),
-        Err(err) => panic!("Request failed:\n{:?}", err),
+        Ok(res) => res.into_string().expect("to convert to string"),
+        Err(err) => {
+            panic!(
+                "Request failed:\n{}",
+                if err.kind() == ureq::ErrorKind::BadHeader {
+                    "Make sure .session.cookie doesn't have a newline".to_string()
+                } else {
+                    err.to_string()
+                }
+            )
+        }
     }
 }
 
