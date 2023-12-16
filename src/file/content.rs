@@ -1,11 +1,9 @@
-pub const LIB_RS_CONTENT: &[u8] = r#"use std::io::{Error, ErrorKind};
-
-pub fn part_1(input: &str) -> Result<usize, Error> {
-    Err(Error::new(ErrorKind::Other, "No Code"))
+pub const LIB_RS_CONTENT: &[u8] = r#"pub fn part_1(input: &str) -> Result<usize, std::io::Error> {
+    Err(std::io::Error::new(std::io::ErrorKind::Other, "No Code"))
 }
 
-pub fn part_2(input: &str) -> Result<usize, Error> {
-    Err(Error::new(ErrorKind::Other, "No Code"))
+pub fn part_2(input: &str) -> Result<usize, std::io::Error> {
+    Err(std::io::Error::new(std::io::ErrorKind::Other, "No Code"))
 }
 "#
 .as_bytes();
